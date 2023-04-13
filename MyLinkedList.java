@@ -13,4 +13,15 @@ package org.example;
         Test all methods of MyLinkedList
 */
 public class MyLinkedList implements List{
+    //Define a private inner class called Node that contains an element of type E and references to the next and previous nodes in the list.
+    private class Node {
+        private Object element;
+        private Node next;
+        private Node prev;
+        public Node(Object element, Node next, Node prev) {
+            this.element = element;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
 }
