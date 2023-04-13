@@ -48,4 +48,13 @@ public class MyLinkedList implements List{
         }
         size++;
     }
+    //Implement the get(int index) method by traversing the list from the head (or tail,
+    // depending on which is closer to the specified index) and returning the element at the specified index.
+    public Object get(int index) {
+        Node current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.element;
+    }
 }
