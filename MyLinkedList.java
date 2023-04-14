@@ -57,4 +57,14 @@ public class MyLinkedList implements List{
         }
         return current.element;
     }
+    //Implement the remove(int index) method by first traversing the list to the node at the specified index. Then, update the next and previous references of the surrounding nodes to remove the node from the list, and decrement the size variable.
+    public void remove(int index) {
+        Node current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
+        size--;
+    }
 }
