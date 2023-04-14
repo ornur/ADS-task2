@@ -1,6 +1,6 @@
 package org.example;
 
-public class MyArrayList implements List {
+public class MyArrayList implements MyList {
     /*
     Define a private instance variable of type Object[] to hold the elements of the list.
     Define an int variable called size to keep track of the number of elements in the list.

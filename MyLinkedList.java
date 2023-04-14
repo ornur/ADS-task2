@@ -15,7 +15,7 @@ import static sun.util.locale.LocaleUtils.isEmpty;
         Implement any other methods specified by the List interface.
         Test all methods of MyLinkedList
 */
-public class MyLinkedList implements List{
+public class MyLinkedList implements MyList {
     //Define a private inner class called Node that contains an element of type E and references to the next and previous nodes in the list.
     private Node head;
     private Node tail;
@@ -66,5 +66,9 @@ public class MyLinkedList implements List{
         current.prev.next = current.next;
         current.next.prev = current.prev;
         size--;
+    }
+    //Implement the size() method by returning the size variable.
+    public int size() {
+        return size;
     }
 }
