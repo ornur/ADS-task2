@@ -13,7 +13,7 @@ package org.example;
         Implement any other methods specified by the List interface.
         Test all methods of MyLinkedList
 */
-public class MyLinkedList<T> implements MyList<T>{
+public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
     private class Node {
         T val;
         Node next;
@@ -23,6 +23,9 @@ public class MyLinkedList<T> implements MyList<T>{
         }
     }
     private Node head;
+    public MyLinkedList() {
+        head = null;
+    }
     public int size(){
         Node current = head;
         int count = 0;
@@ -69,17 +72,7 @@ public class MyLinkedList<T> implements MyList<T>{
         }
     }
 
-    @Override
-    public T remove(int index) {
-        return null;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    public boolean remove(Object item) {
+    public boolean remove(T item) {
         if (head.val == item) {
             head = head.next;
             return true;
@@ -93,6 +86,24 @@ public class MyLinkedList<T> implements MyList<T>{
             current = current.next;
         }
         return false;
+    }
+
+    public T remove(int index) {
+        if (index == 0) {
+            T temp = head.val;
+            head = head.next;
+            return temp;
+        }
+        Node current = head;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+        T temp = current.next.val;
+        current.next = current.next.next;
+        return temp;
+    }
+    public void clear() {
+        head = null;
     }
     public T get(int index) {
         Node current = head;
@@ -131,7 +142,7 @@ public class MyLinkedList<T> implements MyList<T>{
         while (current != null) {
             Node next = current.next;
             while (next != null) {
-                if (compareTo(current.val, next.val) > 0) {
+                if (compare(current.val, next.val) > 0) {
                     T temp = current.val;
                     current.val = next.val;
                     next.val = temp;
@@ -141,7 +152,20 @@ public class MyLinkedList<T> implements MyList<T>{
             current = current.next;
         }
     }
-    public int compareTo(T o1, T o2) {
-        return 0;
+    public static  <T extends Comparable<T>>int compare(T o1, T o2) {
+        return o1.compareTo(o2);
+    }
+    public String toString(){
+        StringBuilder result = new StringBuilder("[");
+        Node current = head;
+        while (current != null) {
+            result.append(current.val);
+            if (current.next != null) {
+                result.append(", ");
+            }
+            current = current.next;
+        }
+        result.append("]");
+        return result.toString();
     }
 }

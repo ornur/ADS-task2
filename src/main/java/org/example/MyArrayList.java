@@ -1,4 +1,5 @@
 package org.example;
+
 /*
     Define a private instance variable of type Object[] to hold the elements of the list.
     Define an int variable called size to keep track of the number of elements in the list.
@@ -55,7 +56,7 @@ public class MyArrayList<T> implements MyList<T> {
             arr[index] = item;
             size++;
         }
-public boolean remove(T item) {
+        public boolean remove(T item) {
             for (int i = 0; i < size; i++) {
                 if (arr[i] == item) {
                     for (int j = i; j < size - 1; j++) {
@@ -106,12 +107,31 @@ public boolean remove(T item) {
         public void sort() {
             for (int i = 0; i < size - 1; i++) {
                 for (int j = 0; j < size - i - 1; j++) {
-                    if (arr[j].toString().compareTo(arr[j + 1].toString()) > 0) {
+                    if (compare(arr[j], arr[j+1]) > 0) {
                         T temp = arr[j];
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
                     }
                 }
             }
+        }
+        public static int compare(Object o1, Object o2) {
+            return o1.toString().compareTo(o2.toString());
+        }
+        /*
+        public static <T extends Comparable<T>> int compare(T o1, T o2) {
+            return o1.compareTo(o2);
+        }
+        */
+        public String toString() {
+            StringBuilder str = new StringBuilder("[");
+            for (int i = 0; i < size; i++) {
+                str.append(arr[i]).append(", ");
+            }
+            if (str.length() > 1) {
+                str = new StringBuilder(str.substring(0, str.length() - 2));
+            }
+            str.append("]");
+            return str.toString();
         }
 }
