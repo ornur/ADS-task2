@@ -1,14 +1,15 @@
 package org.example;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("START OF TESTS");
         System.out.println("TESTING MyArrayList");
         MyList<Integer> list = new MyArrayList<>();
         list.add(1);
-        list.add(2);
+        list.add(22);
         list.add(3);
         list.add(4);
-        list.add(5);
+        list.add(55);
         System.out.println(list);
         System.out.println("Size: " + list.size());
         System.out.println("Contains 3: " + list.contains(3));
@@ -29,9 +30,9 @@ public class Main {
         System.out.println("\n");
         System.out.println("TESTING MyLinkedList");
         MyLinkedList<Integer> list2 = new MyLinkedList<>();
-        list2.add(1);
+        list2.add(11);
         list2.add(2);
-        list2.add(3);
+        list2.add(33);
         list2.add(4);
         list2.add(5);
         System.out.println(list2);

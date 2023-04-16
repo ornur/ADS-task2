@@ -10,11 +10,11 @@ package org.example;
     Implement any other methods specified by the List interface.
     Test all methods of MyArrayList
      */
-public class MyArrayList<T> implements MyList<T> {
-        T [] arr;
+public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
+        transient Object [] arr;
         int size;
         public MyArrayList() {
-            arr = (T[]) new Object[10];
+            arr = new Object[10];
             size = 0;
         }
         public int size() {
@@ -30,7 +30,7 @@ public class MyArrayList<T> implements MyList<T> {
         }
         public void add(T item) {
             if (size == arr.length) {
-                T [] newArr = (T[]) new Object[arr.length * 2];
+                Object [] newArr = (T[]) new Object[arr.length * 2];
                 for (int i = 0; i < arr.length; i++) {
                     newArr[i] = arr[i];
                 }
@@ -44,7 +44,7 @@ public class MyArrayList<T> implements MyList<T> {
                 throw new IndexOutOfBoundsException();
             }
             if (size == arr.length) {
-                T [] newArr = (T[]) new Object[arr.length * 2];
+                Object [] newArr = (T[]) new Object[arr.length * 2];
                 for (int i = 0; i < arr.length; i++) {
                     newArr[i] = arr[i];
                 }
@@ -72,13 +72,13 @@ public class MyArrayList<T> implements MyList<T> {
             if (index < 0 || index >= size) {
                 throw new IndexOutOfBoundsException();
             }
-            return arr[index];
+            return (T) arr[index];
         }
         public T remove(int index) {
             if (index < 0 || index >= size) {
                 throw new IndexOutOfBoundsException();
             }
-            T item = arr[index];
+            T item = (T) arr[index];
             for (int i = index; i < size - 1; i++) {
                 arr[i] = arr[i + 1];
             }
@@ -107,22 +107,15 @@ public class MyArrayList<T> implements MyList<T> {
         public void sort() {
             for (int i = 0; i < size - 1; i++) {
                 for (int j = 0; j < size - i - 1; j++) {
-                    if (compare(arr[j], arr[j+1]) > 0) {
-                        T temp = arr[j];
+                    if (((T) arr[j]).compareTo((T) arr[j + 1]) > 0) {
+                        T temp = (T) arr[j];
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
                     }
                 }
             }
         }
-        public static int compare(Object o1, Object o2) {
-            return o1.toString().compareTo(o2.toString());
-        }
-        /*
-        public static <T extends Comparable<T>> int compare(T o1, T o2) {
-            return o1.compareTo(o2);
-        }
-        */
+
         public String toString() {
             StringBuilder str = new StringBuilder("[");
             for (int i = 0; i < size; i++) {
